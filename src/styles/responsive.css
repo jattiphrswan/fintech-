@@ -1,0 +1,77 @@
+/* Original layout and breakpoints are preserved in globals.css. */
+.site-header { height: 94px; }
+
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 94px;
+  z-index: 100;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0;
+  transition: top .3s ease, width .3s ease, height .3s ease, padding .3s ease, border-radius .3s ease, background .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+.site-nav.is-scrolled {
+  top: 12px;
+  width: min(1180px, 94%);
+  height: 64px;
+  padding: 10px 22px;
+  border-radius: 50px;
+  background: rgba(15, 22, 37, .92);
+  border-color: rgba(255, 255, 255, .12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .3);
+}
+
+html { scroll-padding-top: 100px; }
+
+.today {
+  background: linear-gradient(90deg, #00f0ff, #0066ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #00f0ff;
+  outline-offset: 5px;
+}
+
+/* Keep the supplied composition usable on narrow phones. */
+@media (max-width: 480px) {
+  .site-header, .site-nav { height: 80px; }
+  .site-nav.is-scrolled { top: 8px; height: 60px; width: 96%; padding: 8px 12px; gap: 8px; }
+  .site-nav.is-scrolled .logo { font-size: 1.2rem; gap: 7px; }
+  .site-nav.is-scrolled .nav-auth { gap: 8px; }
+  nav { padding: 22px 5%; gap: 12px; }
+  .nav-auth { gap: 12px; font-size: .75rem; }
+  .signup-btn { padding: 9px 12px; }
+  .hero-title { font-size: clamp(1.9rem, 8.3vw, 2.5rem); }
+  .hero-ui { width: 100%; min-width: 0; }
+  .ui-card { padding: 22px; }
+  .ui-header { gap: 8px; }
+  .user-info { gap: 8px; }
+  .avatar { flex-shrink: 0; }
+  .user-text h4 { font-size: .8rem; }
+  .btn { padding: 15px 22px; font-size: .9rem; }
+  .chart-card { bottom: -75px; }
+  .hero { padding-bottom: 135px; }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot, .cursor-circle { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .word, .hero-badge { opacity: 1; transform: none; filter: none; }
+  .ui-wrapper { transform: none !important; }
+  .cursor-dot, .cursor-circle { display: none; }
+  body, .word, .ui-card { cursor: auto; }
+  button, a { cursor: pointer; }
+}

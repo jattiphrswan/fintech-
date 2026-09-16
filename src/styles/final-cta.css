@@ -1,0 +1,38 @@
+﻿.final-cta { position: relative; z-index: 10; width: min(1180px, 90%); margin: 0 auto; padding: 100px 0 80px; }
+.final-cta-card { position: relative; isolation: isolate; display: flex; align-items: center; min-height: 410px; }
+.final-cta-background { position: absolute; inset: 0; z-index: -1; overflow: hidden; border-radius: 32px; border: 1px solid #ffffff16; background: radial-gradient(ellipse at 80% 60%, #0066ff30, transparent 65%), linear-gradient(115deg, #122239, #0d172a); box-shadow: 0 20px 60px #0003; }
+.final-cta-background > span { position: absolute; top: 50%; left: -3%; translate: 0 -50%; font-size: clamp(170px, 23vw, 330px); line-height: 1; letter-spacing: -20px; font-weight: 700; color: #7ddfff05; white-space: nowrap; user-select: none; }
+.final-cta-copy { position: relative; z-index: 2; width: 60%; padding: 60px 0 60px 8.3%; }
+.final-cta-copy > p { font-size: 14px; line-height: 1.6; font-weight: 500; color: #b6c7da; }
+.final-cta h2 { font-size: clamp(30px, 3.4vw, 46px); line-height: 1.35; letter-spacing: -1.4px; font-weight: 500; color: #fff; margin: 16px 0 28px; }
+.final-cta-button.btn { border-radius: 50px; font-size: 12px; padding: 13px 22px; border: 1px solid #65e9ff55; }
+.final-cta-artwork { position: absolute; right: 3%; bottom: 0; width: 42%; height: calc(100% + 100px); overflow: hidden; pointer-events: none; }
+.final-cta-artwork img { display: block; position: absolute; width: 100%; height: auto; top: 0; left: 0; filter: drop-shadow(-8px 4px 15px #0003); transform-origin: bottom center; transition: transform .6s ease; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .final-cta-card:hover .final-cta-artwork img { transform: rotate(-1deg); }
+}
+@media (max-width: 1199px) and (min-width: 768px) {
+  .final-cta { padding-top: 80px; }
+  .final-cta-card { min-height: 340px; }
+  .final-cta-copy { padding-left: 7%; }
+  .final-cta-copy > p { font-size: 11px; }
+  .final-cta h2 { font-size: clamp(27px, 3.4vw, 38px); }
+  .final-cta-artwork { height: calc(100% + 65px); width: 43%; right: 2%; }
+  .final-cta-artwork img { width: auto; height: 112%; max-width: none; }
+}
+@media (max-width: 767px) {
+  .final-cta { padding: 30px 0 56px; }
+  .final-cta-card { display: block; min-height: 0; }
+  .final-cta-background { border-radius: 26px; }
+  .final-cta-copy { width: 100%; padding: 38px 26px 20px; }
+  .final-cta-copy > p { font-size: 11px; max-width: 280px; }
+  .final-cta h2 { font-size: clamp(26px, 6vw, 38px); letter-spacing: -.8px; margin: 13px 0 22px; }
+  .final-cta-artwork { position: relative; right: auto; width: min(360px, 90%); height: 335px; margin: 0 0 0 auto; }
+  .final-cta-artwork img { width: 100%; }
+  .final-cta-background > span { top: 60%; font-size: 180px; letter-spacing: -10px; }
+}
+@media (max-width: 380px) {
+  .final-cta-copy { padding-inline: 20px; }
+  .final-cta h2 { font-size: 24px; }
+  .final-cta-artwork { height: 270px; }
+}

@@ -1,0 +1,619 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payline - Revolutionizing Finance</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Reset & Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #080b14;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* --- Custom Cursor Styles --- */
+        @media (hover: hover) and (pointer: fine) {
+            body, button, a, .word, .ui-card {
+                cursor: none;
+            }
+
+            .cursor-dot, .cursor-circle {
+                position: fixed;
+                top: 0; left: 0;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                transform: translate(-50%, -50%);
+                mix-blend-mode: difference;
+            }
+
+            .cursor-dot {
+                width: 8px; height: 8px;
+                background: #fff;
+                transition: width 0.2s, height 0.2s;
+            }
+
+            .cursor-circle {
+                width: 40px; height: 40px;
+                border: 2px solid #fff;
+                transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
+            }
+
+            .cursor-hover .cursor-dot { width: 0; height: 0; }
+            .cursor-hover .cursor-circle { width: 60px; height: 60px; background: #fff; border-color: transparent; }
+        }
+
+        /* --- Background Elements --- */
+        .bg-grid {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .orb-1 { width: 500px; height: 500px; background: rgba(40, 80, 255, 0.15); top: -10%; left: -10%; }
+        .orb-2 { width: 600px; height: 600px; background: rgba(100, 0, 255, 0.1); bottom: -20%; right: -10%; }
+
+        /* --- Navigation --- */
+        nav {
+            position: relative;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 5%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 30px; height: 30px;
+            background: linear-gradient(135deg, #00f0ff, #0066ff);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: #fff; }
+
+        .nav-auth {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .signin-btn {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .signup-btn {
+            padding: 10px 22px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .signup-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* --- Hero Layout --- */
+        .hero {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px 5% 100px;
+            min-height: calc(100vh - 100px);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* --- Hero Text Content --- */
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #00f0ff;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.2s forwards;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0066ff, #00f0ff);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+        }
+
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 102, 255, 0.5); }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); }
+
+        /* --- Hero UI Mockup --- */
+        .hero-ui {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .ui-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            transition: transform 0.2s ease-out;
+            transform-style: preserve-3d;
+        }
+
+        .ui-card {
+            background: rgba(20, 25, 40, 0.6);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 30px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            transform: translateZ(40px);
+        }
+
+        .ui-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 40px; height: 40px;
+            background: linear-gradient(135deg, #ff0055, #7000ff);
+            border-radius: 50%;
+        }
+
+        .user-text h4 { font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.8); }
+        .user-text p { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+
+        .settings-icon {
+            color: rgba(255,255,255,0.4);
+            font-size: 1.2rem;
+        }
+
+        .balance-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .balance-label {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.03);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .stat-box h5 { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-bottom: 5px; font-weight: 400; }
+        .stat-box p { font-size: 1.1rem; font-weight: 600; color: #fff; }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover { background: rgba(0, 102, 255, 0.1); border-color: rgba(0, 102, 255, 0.2); }
+
+        .action-icon { font-size: 1.2rem; margin-bottom: 5px; display: block; }
+        .action-text { font-size: 0.75rem; color: rgba(255,255,255,0.7); }
+
+        /* Floating Chart Card */
+        .chart-card {
+            position: absolute;
+            right: -40px;
+            bottom: 40px;
+            width: 240px;
+            background: rgba(20, 25, 40, 0.8);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transform: translateZ(80px);
+            z-index: 2;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .chart-header h5 { font-size: 0.85rem; font-weight: 500; color: rgba(255,255,255,0.8); }
+        .chart-header button { 
+            background: rgba(255,255,255,0.05); 
+            border: none; color: #fff; 
+            font-size: 0.7rem; padding: 4px 8px; 
+            border-radius: 6px; 
+        }
+
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 80px;
+        }
+
+        .bar {
+            flex: 1;
+            background: linear-gradient(to top, #0066ff, #00f0ff);
+            border-radius: 4px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .bar:hover { opacity: 1; }
+
+        /* --- Animations --- */
+        .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px);
+            filter: blur(8px);
+            animation: revealWord 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes revealWord {
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+            .hero { flex-direction: column; text-align: center; padding-top: 20px; }
+            .hero-text { margin-bottom: 60px; }
+            .hero-badge, .cta-group { justify-content: center; }
+            .hero-subtitle { margin-left: auto; margin-right: auto; }
+            .chart-card { right: 10px; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-circle" id="cursorCircle"></div>
+
+    <!-- Background Elements -->
+    <div class="bg-grid"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <div class="logo-icon">P</div>
+            Payline
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="nav-auth">
+            <a href="#" class="signin-btn">Sign In</a>
+            <a href="#" class="signup-btn">Create Account</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        
+        <!-- Left Column: Text -->
+        <div class="hero-text">
+            <div class="hero-badge">
+                <span>🚀</span> Next Gen Fintech Platform
+            </div>
+            
+            <h1 class="hero-title" id="heroTitle">
+                <!-- Split into spans manually for exact line breaks -->
+                <span class="word" style="animation-delay: 0.2s">Revolutionizing</span>
+                <span class="word" style="animation-delay: 0.3s">finance</span>
+                <span class="word" style="animation-delay: 0.4s">for</span>
+                <span class="word" style="animation-delay: 0.5s">a</span>
+                <span class="word" style="animation-delay: 0.6s">better</span>
+                <span class="word" style="animation-delay: 0.7s">tomorrow.</span>
+                <br>
+                <span class="word" style="animation-delay: 0.85s; background: linear-gradient(90deg, #00f0ff, #0066ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Today.</span>
+            </h1>
+            
+            <p class="hero-subtitle" id="subtitle">
+                Experience seamless banking, instant transfers, and powerful analytics all in one beautiful dashboard. Take control of your financial future.
+            </p>
+            
+            <div class="cta-group">
+                <a href="#" class="btn btn-primary">Get Started →</a>
+                <a href="#" class="btn btn-secondary">Learn more</a>
+            </div>
+        </div>
+
+        <!-- Right Column: UI Mockup -->
+        <div class="hero-ui">
+            <div class="ui-wrapper" id="uiWrapper">
+                
+                <!-- Main Dashboard Card -->
+                <div class="ui-card">
+                    <div class="ui-header">
+                        <div class="user-info">
+                            <div class="avatar"></div>
+                            <div class="user-text">
+                                <h4>Welcome back, William</h4>
+                                <p>Premium User</p>
+                            </div>
+                        </div>
+                        <div class="settings-icon">⚙️</div>
+                    </div>
+
+                    <div class="balance-label">Available Balance</div>
+                    <div class="balance-amount">$12,480.50</div>
+
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <h5>Transactions (Month)</h5>
+                            <p>$48,320.00</p>
+                        </div>
+                        <div class="stat-box">
+                            <h5>Total Fees</h5>
+                            <p>$320.40</p>
+                        </div>
+                    </div>
+
+                    <div class="action-grid">
+                        <div class="action-btn">
+                            <span class="action-icon">↗️</span>
+                            <span class="action-text">Transfer</span>
+                        </div>
+                        <div class="action-btn">
+                            <span class="action-icon">💸</span>
+                            <span class="action-text">Paypal</span>
+                        </div>
+                        <div class="action-btn">
+                            <span class="action-icon">📊</span>
+                            <span class="action-text">Stats</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Chart Card -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h5>Weekly Spendings</h5>
+                        <button>Share</button>
+                    </div>
+                    <div class="bar-chart">
+                        <div class="bar" style="height: 40%"></div>
+                        <div class="bar" style="height: 70%"></div>
+                        <div class="bar" style="height: 50%"></div>
+                        <div class="bar" style="height: 90%"></div>
+                        <div class="bar" style="height: 60%"></div>
+                        <div class="bar" style="height: 80%"></div>
+                        <div class="bar" style="height: 45%"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        // --- 1. Word-by-Word Subtitle Splitter ---
+        const subtitleEl = document.getElementById('subtitle');
+        const subtitleText = subtitleEl.textContent.trim();
+        const words = subtitleText.split(/\s+/);
+        
+        // Start subtitle animation after the title finishes (around 1.2s)
+        subtitleEl.innerHTML = words.map((word, index) => {
+            const delay = 1.2 + (index * 0.05); 
+            return `<span class="word" style="animation-delay: ${delay}s">${word}</span>`;
+        }).join(' ');
+
+        // --- 2. Custom Cursor Logic ---
+        const cursorDot = document.getElementById('cursorDot');
+        const cursorCircle = document.getElementById('cursorCircle');
+        const interactiveElements = document.querySelectorAll('button, a, .action-btn, .ui-card');
+
+        let mouseX = 0, mouseY = 0;
+        let circleX = 0, circleY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.left = mouseX + 'px';
+            cursorDot.style.top = mouseY + 'px';
+        });
+
+        function animateCursor() {
+            circleX += (mouseX - circleX) * 0.15;
+            circleY += (mouseY - circleY) * 0.15;
+            cursorCircle.style.left = circleX + 'px';
+            cursorCircle.style.top = circleY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+
+        // --- 3. 3D Mouse Parallax Logic ---
+        const uiWrapper = document.getElementById('uiWrapper');
+        const heroSection = document.getElementById('hero');
+
+        heroSection.addEventListener('mousemove', (e) => {
+            // Get mouse position relative to the hero section
+            const rect = heroSection.getBoundingClientRect();
+            const mouseXVal = (e.clientX - rect.left) / rect.width - 0.5;
+            const mouseYVal = (e.clientY - rect.top) / rect.height - 0.5;
+
+            // Apply 3D rotation to the UI wrapper
+            const rotateY = mouseXVal * 15; // Max 15deg rotation
+            const rotateX = -mouseYVal * 15;
+            
+            uiWrapper.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+        });
+
+        // Reset rotation when mouse leaves the hero section
+        heroSection.addEventListener('mouseleave', () => {
+            uiWrapper.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        });
+
+    </script>
+
+</body>
+</html>
