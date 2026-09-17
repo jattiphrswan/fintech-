@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080b14" />
+    <script>
+      (() => {
+        let saved;
+        try { saved = localStorage.getItem('payline-theme'); } catch {}
+        const theme = saved === 'light' || saved === 'dark' ? saved
+          : typeof matchMedia === 'function' && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+        document.querySelector('meta[name="theme-color"]').content = theme === 'light' ? '#f5f8fc' : '#080b14';
+      })();
+    </script>
+    <meta name="description" content="Payline — seamless banking, instant transfers, and powerful analytics all in one beautiful dashboard." />
+    <title>Payline - Revolutionizing Finance</title>
+    <link rel="icon" type="image/svg+xml" href="/fintech-/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <script type="module" crossorigin src="/fintech-/assets/index-CD3rfSjc.js"></script>
+    <link rel="stylesheet" crossorigin href="/fintech-/assets/index-CZNHz7F6.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

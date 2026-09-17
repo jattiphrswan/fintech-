@@ -61,7 +61,7 @@ export default function App() {
   return (
     <>
       <div inert={blocking} aria-hidden={blocking ? true : undefined}>
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
           <RouteEffects />
           <CustomCursor />
           <div className="bg-grid" aria-hidden="true" />
