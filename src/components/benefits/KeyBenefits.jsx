@@ -17,7 +17,7 @@ function BenefitTile({ id, title, text, image, alt }) {
   return <article className={`benefits-tile benefits-tile--${id}`}>
     <div className="benefits-copy"><h3>{title}</h3><p>{text}</p></div>
     <div className="benefits-visual">
-      {image ? <img src={`${import.meta.env.BASE_URL}${encodeURIComponent(image)}`} alt={alt} loading="lazy" decoding="async" /> : <CreditCardVisual />}
+      {image ? <img src={image} alt={alt} loading="lazy" decoding="async" /> : <CreditCardVisual />}
     </div>
   </article>;
 }

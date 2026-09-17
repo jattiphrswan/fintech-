@@ -1,3 +1,4 @@
+import ctaImg from '../../assets/images/cta-image.png';
 import '../../styles/final-cta.css';
 
 export default function FinalCTA() {
@@ -10,7 +11,7 @@ export default function FinalCTA() {
         <a className="btn btn-primary final-cta-button" href="#hero">Pay Rent Now</a>
       </div>
       <div className="final-cta-artwork">
-        <img src={`${import.meta.env.BASE_URL}cta%20image.png`} alt="Payline mobile payment app" width="1200" height="1306" loading="lazy" decoding="async" />
+        <img src={ctaImg} alt="Payline mobile payment app" width="1200" height="1306" loading="lazy" decoding="async" />
       </div>
     </div>
   </section>;
