@@ -1,17 +1,9 @@
-import Navbar from '../components/layout/Navbar';
-import Hero from '../components/hero/Hero';
-import CustomCursor from '../components/ui/CustomCursor';
+﻿import Hero from '../components/hero/Hero';
 import WhyChooseUs from '../components/features/WhyChooseUs';
 import KeyBenefits from '../components/benefits/KeyBenefits';
 import FinalCTA from '../components/cta/FinalCTA';
+import GrowthCalculator from '../components/growth/GrowthCalculator';
+import FAQ from '../components/faq/FAQ';
 
-export default function Home() {
-  return <>
-    <CustomCursor />
-    <div className="bg-grid" aria-hidden="true" />
-    <div className="glow-orb orb-1" aria-hidden="true" />
-    <div className="glow-orb orb-2" aria-hidden="true" />
-    <Navbar />
-    <main><Hero /><WhyChooseUs /><KeyBenefits /><FinalCTA /></main>
-  </>;
-}
+export default function Home() { return <><Hero /><WhyChooseUs /><KeyBenefits /><GrowthCalculator /><FAQ /><FinalCTA /></>; }
+

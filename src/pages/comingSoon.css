@@ -1,0 +1,343 @@
+/* Premium Payline Coming Soon Page Styling */
+
+.coming {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: calc(100vh - 180px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px 80px;
+  box-sizing: border-box;
+}
+
+/* Central Rounded Card Panel */
+.coming__panel {
+  position: relative;
+  width: min(1080px, 94%);
+  min-height: 520px;
+  border-radius: 40px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 72px 40px 72px;
+  box-sizing: border-box;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Dark Mode Theme */
+[data-theme="dark"] .coming__panel,
+:root:not([data-theme="light"]) .coming__panel {
+  background: linear-gradient(155deg, rgba(11, 18, 32, 0.88) 0%, rgba(6, 10, 18, 0.94) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 30px 100px rgba(0, 0, 0, 0.5),
+    0 0 80px rgba(0, 160, 255, 0.07),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+}
+
+/* Light Mode Theme */
+[data-theme="light"] .coming__panel {
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.96) 0%, rgba(246, 250, 255, 0.92) 100%);
+  border: 1px solid rgba(0, 120, 255, 0.14);
+  box-shadow: 
+    0 30px 90px rgba(0, 70, 190, 0.09),
+    0 10px 30px rgba(0, 0, 0, 0.03),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+}
+
+/* Subtle Internal Radial Glow */
+.coming__panel::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 300px;
+  background: radial-gradient(ellipse at center, rgba(0, 160, 255, 0.18) 0%, rgba(0, 210, 255, 0.05) 45%, transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Top Center Brand Badge (Matching reference top tab/pill) */
+.coming__brand {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 24px 9px;
+  border-radius: 0 0 18px 18px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  z-index: 3;
+}
+
+[data-theme="dark"] .coming__brand,
+:root:not([data-theme="light"]) .coming__brand {
+  background: rgba(14, 23, 40, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: none;
+  color: var(--text);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="light"] .coming__brand {
+  background: #ffffff;
+  border: 1px solid rgba(0, 120, 255, 0.15);
+  border-top: none;
+  color: #0b1220;
+  box-shadow: 0 8px 24px rgba(0, 80, 200, 0.08);
+}
+
+.coming__brand span {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #0066e8, #00c6ff);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 140, 255, 0.4);
+}
+
+/* Center Highlight Icon */
+.coming__icon {
+  position: relative;
+  z-index: 2;
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  margin: 12px 0 22px;
+  color: var(--accent);
+  transition: transform 0.2s ease;
+}
+
+[data-theme="dark"] .coming__icon,
+:root:not([data-theme="light"]) .coming__icon {
+  background: linear-gradient(135deg, rgba(0, 160, 255, 0.18), rgba(0, 220, 255, 0.06));
+  border: 1px solid rgba(0, 160, 255, 0.3);
+  box-shadow: 0 0 30px rgba(0, 160, 255, 0.25);
+}
+
+[data-theme="light"] .coming__icon {
+  background: linear-gradient(135deg, rgba(0, 108, 230, 0.1), rgba(0, 190, 240, 0.05));
+  border: 1px solid rgba(0, 108, 230, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 108, 230, 0.15);
+}
+
+/* Eyebrow Label */
+.coming__eyebrow {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* Main Heading */
+.coming__panel h1 {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(32px, 4.4vw, 54px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -1.6px;
+  margin: 0 0 16px;
+  color: var(--text);
+  max-width: 680px;
+}
+
+.coming__panel h1 span {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* Description Text */
+.coming__panel p {
+  position: relative;
+  z-index: 2;
+  color: var(--muted);
+  font-size: clamp(15px, 1.5vw, 17px);
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0 0 36px;
+}
+
+/* Premium CTA Button */
+.coming__button {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 34px;
+  border-radius: 50px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+}
+
+[data-theme="dark"] .coming__button,
+:root:not([data-theme="light"]) .coming__button {
+  background: linear-gradient(110deg, #0066e8, #0099ff);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 102, 232, 0.45);
+}
+
+[data-theme="dark"] .coming__button:hover,
+:root:not([data-theme="light"]) .coming__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(0, 102, 232, 0.6);
+}
+
+/* In light mode, reference image uses high-contrast dark rounded button */
+[data-theme="light"] .coming__button {
+  background: #090f1d;
+  border: 1px solid rgba(9, 15, 29, 0.1);
+  color: #ffffff;
+  box-shadow: 0 10px 28px rgba(9, 15, 29, 0.25);
+}
+
+[data-theme="light"] .coming__button:hover {
+  transform: translateY(-2px);
+  background: #050a14;
+  box-shadow: 0 14px 35px rgba(9, 15, 29, 0.35);
+}
+
+/* Floating Decorative Elements */
+.coming__float {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .coming__float,
+:root:not([data-theme="light"]) .coming__float {
+  background: rgba(14, 23, 40, 0.85);
+  border: 1px solid rgba(0, 160, 255, 0.25);
+  color: var(--accent);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.35),
+    0 0 20px rgba(0, 160, 255, 0.15);
+  backdrop-filter: blur(16px);
+}
+
+[data-theme="light"] .coming__float {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 120, 255, 0.16);
+  color: var(--accent);
+  box-shadow: 
+    0 15px 35px rgba(0, 70, 190, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(16px);
+}
+
+.coming__float--one {
+  left: 9%;
+  bottom: 18%;
+}
+
+.coming__float--two {
+  right: 9%;
+  bottom: 22%;
+}
+
+/* Background Watermark */
+.coming__watermark {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(75px, 14vw, 160px);
+  font-weight: 700;
+  letter-spacing: -4px;
+  color: var(--line);
+  opacity: 0.18;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  white-space: nowrap;
+}
+
+/* Tablet & Mobile Breakpoints */
+@media (max-width: 900px) {
+  .coming__panel {
+    min-height: 480px;
+    padding: 64px 28px 60px;
+    border-radius: 32px;
+  }
+  .coming__float--one {
+    left: 4%;
+    bottom: 12%;
+    width: 44px;
+    height: 44px;
+  }
+  .coming__float--two {
+    right: 4%;
+    bottom: 14%;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 600px) {
+  .coming {
+    padding: 20px 16px 60px;
+    min-height: calc(100vh - 160px);
+  }
+  .coming__panel {
+    min-height: 420px;
+    padding: 56px 20px 50px;
+    border-radius: 24px;
+  }
+  .coming__panel h1 {
+    font-size: 28px;
+    letter-spacing: -1px;
+  }
+  .coming__panel p {
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+  .coming__button {
+    width: 100%;
+    max-width: 280px;
+    padding: 13px 24px;
+  }
+  .coming__float {
+    display: none; /* Hide on compact phones to preserve whitespace */
+  }
+}
