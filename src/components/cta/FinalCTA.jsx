@@ -1,4 +1,4 @@
-﻿import '../../styles/final-cta.css';
+import '../../styles/final-cta.css';
 
 export default function FinalCTA() {
   return <section className="final-cta" id="get-started" aria-labelledby="final-cta-title">
@@ -10,7 +10,7 @@ export default function FinalCTA() {
         <a className="btn btn-primary final-cta-button" href="#hero">Pay Rent Now</a>
       </div>
       <div className="final-cta-artwork">
-        <img src="/cta image.png" alt="Payline mobile payment app" width="1200" height="1306" loading="lazy" decoding="async" />
+        <img src={`${import.meta.env.BASE_URL}cta%20image.png`} alt="Payline mobile payment app" width="1200" height="1306" loading="lazy" decoding="async" />
       </div>
     </div>
   </section>;

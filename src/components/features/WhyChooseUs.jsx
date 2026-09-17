@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { benefits } from '../../data/benefits';
 import '../../styles/why-choose-us.css';
 
@@ -22,7 +22,7 @@ function RightCards() { return <CardColumn side="right" />; }
 function CenterImage({ imageRef }) {
   return <div className="why-image-stage" ref={imageRef}>
     <div className="why-image-crop">
-      <img src="/why%20choose%20us.png" alt="Payline mobile banking app shown on two phones" width="1340" height="1174" loading="lazy" />
+      <img src={`${import.meta.env.BASE_URL}why%20choose%20us.png`} alt="Payline mobile banking app shown on two phones" width="1340" height="1174" loading="lazy" />
     </div>
   </div>;
 }
